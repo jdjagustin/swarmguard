@@ -66,6 +66,20 @@ tests/                   automated tests
 docs/                    architecture and design documentation
 ```
 
+## References
+
+Documentation behind the technologies this project relies on:
+
+- **Stripe:** [Webhooks](https://docs.stripe.com/webhooks), [Testing and test mode](https://docs.stripe.com/testing), [Radar (fraud prevention)](https://docs.stripe.com/radar)
+- **AWS:** [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html), [VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html), [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+- **Local AWS emulation:** [Floci](https://github.com/floci-io/floci), an open-source local AWS emulator being evaluated for local development
+- **Zero Trust:** [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
+- **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
+- **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
+- **Diagrams:** [Mermaid](https://mermaid.js.org)
+
+Agent frameworks and LLM providers will be listed here once they are chosen.
+
 ## License
 
 MIT

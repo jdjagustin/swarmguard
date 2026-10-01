@@ -21,15 +21,16 @@ SwarmGuard is a small team of specialized agents that share structured messages 
 Containment actions are proposals by default and require human approval. Nothing is executed automatically in the early phases.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Logs and payment events] --> B[Scout]
-    B -- SuspicionSignal --> C[Coordinator]
-    C -- activates --> D[Investigator]
-    D -- hypotheses --> C
+    B -->|SuspicionSignal| C[Coordinator]
+    C -->|investigate| D[Investigator]
+    D -->|hypotheses| C
     C --> E{Decision}
-    E --> F[Discard]
-    E --> G[Report]
-    E --> H[Propose containment, human approval]
+    E -->|noise| F[Discard]
+    E -->|worth noting| G[Report]
+    E -->|needs action| H[Propose containment]
+    H --> I[Human approval]
 ```
 
 ## What will make it different: evaluation
@@ -64,6 +65,20 @@ evals/scenarios/         synthetic incident scenarios
 tests/                   automated tests
 docs/                    architecture and design documentation
 ```
+
+## References
+
+Documentation behind the technologies this project relies on:
+
+- **Stripe:** [Webhooks](https://docs.stripe.com/webhooks), [Testing and test mode](https://docs.stripe.com/testing), [Radar (fraud prevention)](https://docs.stripe.com/radar)
+- **AWS:** [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html), [VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html), [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
+- **Local AWS emulation:** [Floci](https://github.com/floci-io/floci), an open-source local AWS emulator being evaluated for local development
+- **Zero Trust:** [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
+- **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
+- **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
+- **Diagrams:** [Mermaid](https://mermaid.js.org)
+
+Agent frameworks and LLM providers will be listed here once they are chosen.
 
 ## License
 

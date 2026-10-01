@@ -21,15 +21,16 @@ SwarmGuard is a small team of specialized agents that share structured messages 
 Containment actions are proposals by default and require human approval. Nothing is executed automatically in the early phases.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Logs and payment events] --> B[Scout]
-    B -- SuspicionSignal --> C[Coordinator]
-    C -- activates --> D[Investigator]
-    D -- hypotheses --> C
+    B -->|SuspicionSignal| C[Coordinator]
+    C -->|investigate| D[Investigator]
+    D -->|hypotheses| C
     C --> E{Decision}
-    E --> F[Discard]
-    E --> G[Report]
-    E --> H[Propose containment, human approval]
+    E -->|noise| F[Discard]
+    E -->|worth noting| G[Report]
+    E -->|needs action| H[Propose containment]
+    H --> I[Human approval]
 ```
 
 ## What will make it different: evaluation

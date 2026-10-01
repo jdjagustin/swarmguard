@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SuspicionSignal",
+  "description": "Structured message emitted by the Scout agent when it detects a suspicious pattern in logs or payment events.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["signal_id", "created_at", "source_agent", "severity", "summary", "evidence"],
+  "properties": {
+    "signal_id": {
+      "type": "string",
+      "pattern": "^sig-[0-9a-f]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_agent": {
+      "type": "string",
+      "enum": ["scout"]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "affected_resources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "reference"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": ["cloudwatch_logs", "vpc_flow_logs", "application_logs", "stripe_event"]
+          },
+          "reference": { "type": "string" },
+          "excerpt": { "type": "string" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

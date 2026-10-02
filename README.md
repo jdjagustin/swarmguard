@@ -43,13 +43,14 @@ Most multi-agent demos never measure whether the agents help. SwarmGuard will sh
 
 ## Message contracts
 
-Agents communicate through JSON messages validated against schemas in [`schemas/`](schemas/).
+Agents communicate through JSON messages validated against schemas in [`schemas/`](schemas/). See [`docs/contracts.md`](docs/contracts.md) for what a contract is, why the project uses them and how they change.
 
 - [`SuspicionSignal`](schemas/suspicion_signal.schema.json): emitted by Scout when it detects something suspicious. Required fields: id, timestamp, source agent, severity, summary and at least one piece of evidence that points to the original record.
+- [`HypothesisReport`](schemas/hypothesis_report.schema.json): emitted by the Investigator after analyzing a signal. Required fields: id, timestamp, source agent, the `signal_id` it analyzed and at least one hypothesis. Each hypothesis has a title, an explanation, a confidence between 0 and 1, a category (including `benign` and `unknown`) and its own evidence.
 
 ## Roadmap
 
-- [x] **Phase 0 - Foundations:** repo skeleton, `SuspicionSignal` schema
+- [x] **Phase 0 - Foundations:** repo skeleton, `SuspicionSignal` and `HypothesisReport` schemas
 - [ ] **Phase 1 - MVP:** Scout, Investigator and Coordinator running locally on synthetic logs and Stripe test-mode events
 - [ ] **Phase 2 - Evaluation harness:** synthetic scenarios, metrics, single-agent baseline
 - [ ] **Phase 3 - Collaboration:** structured message passing and consensus between agents

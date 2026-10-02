@@ -43,7 +43,7 @@ sequenceDiagram
     end
 ```
 
-Only the `SuspicionSignal` contract exists today. The hypothesis and action messages will get their own schemas in later pull requests, before any agent code depends on them.
+Two contracts exist today: `SuspicionSignal` (Scout to Coordinator) and `HypothesisReport` (Investigator to Coordinator). The decision and action messages will get their own schemas in later pull requests, before any agent code depends on them.
 
 ## Design decisions
 
@@ -66,3 +66,7 @@ Containment actions are proposals. Nothing that changes infrastructure runs with
 ### Local first
 
 Development starts with synthetic data and a local AWS emulator. Real AWS comes in a later phase, once the agents and the evaluation harness work.
+
+### Evidence shape is copied, not shared
+
+Both message contracts describe evidence the same way: a source, a reference to the original record, an optional excerpt and an observation time. The definition is copied into each schema instead of shared through a common file, because it keeps each schema readable on its own and reviewable in one place. The trade-off is that a change must be made in both. An automated test that compares the copies is planned, and once a third message needs the same shape it should move to a shared schema referenced from all of them.

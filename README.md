@@ -1,5 +1,14 @@
 # SwarmGuard
 
+![Status: design stage](https://img.shields.io/badge/status-design%20stage-yellow)
+![Python](https://img.shields.io/badge/Python-planned-3776AB?logo=python&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-planned-FF9900)
+![Stripe](https://img.shields.io/badge/Stripe-planned-635BFF?logo=stripe&logoColor=white)
+![JSON Schema](https://img.shields.io/badge/JSON%20Schema-message%20contracts-2B6CB0)
+![NIST SP 800-207](https://img.shields.io/badge/NIST-SP%20800--207-005EA2)
+![Diagrams: Mermaid](https://img.shields.io/badge/diagrams-Mermaid-FF3670?logo=mermaid&logoColor=white)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 **Multi-agent incident response for cloud workloads: log anomaly detection, payment-event correlation and Zero-Trust containment, with a built-in evaluation harness.**
 
 > **Status: early design stage.** The repo skeleton and the first message contract exist. There is no agent code yet. This README is updated in every pull request that changes the design.

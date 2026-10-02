@@ -80,6 +80,8 @@ Documentation behind the technologies this project relies on:
 - **Local AWS emulation:** [Floci](https://github.com/floci-io/floci), an open-source local AWS emulator being evaluated for local development
 - **Zero Trust:** [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
 - **LLM application security:** [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/)
+- **Agent tool security (open decision):** [Model Context Protocol specification](https://modelcontextprotocol.io/specification/latest), [MCP Security Best Practices](https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices)
+- **Adversary tactics against ML systems:** [MITRE ATLAS](https://atlas.mitre.org/)
 - **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
 - **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
 - **Diagrams:** [Mermaid](https://mermaid.js.org) and an animated SVG (SMIL)

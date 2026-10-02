@@ -48,6 +48,10 @@ Agents communicate through JSON messages validated against schemas in [`schemas/
 - [`SuspicionSignal`](schemas/suspicion_signal.schema.json): emitted by Scout when it detects something suspicious. Required fields: id, timestamp, source agent, severity, summary and at least one piece of evidence that points to the original record.
 - [`HypothesisReport`](schemas/hypothesis_report.schema.json): emitted by the Investigator after analyzing a signal. Required fields: id, timestamp, source agent, the `signal_id` it analyzed and at least one hypothesis. Each hypothesis has a title, an explanation, a confidence between 0 and 1, a category (including `benign` and `unknown`) and its own evidence.
 
+## Security
+
+SwarmGuard reads untrusted text and can propose infrastructure changes, so the safety model is part of the design. Agents propose, deterministic code decides, and containment needs human approval. See [docs/security.md](docs/security.md) for the threat model and the planned controls.
+
 ## Roadmap
 
 - [x] **Phase 0 - Foundations:** repo skeleton, `SuspicionSignal` and `HypothesisReport` schemas
@@ -75,6 +79,7 @@ Documentation behind the technologies this project relies on:
 - **AWS:** [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html), [VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html), [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
 - **Local AWS emulation:** [Floci](https://github.com/floci-io/floci), an open-source local AWS emulator being evaluated for local development
 - **Zero Trust:** [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
+- **LLM application security:** [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/)
 - **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
 - **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
 - **Diagrams:** [Mermaid](https://mermaid.js.org) and an animated SVG (SMIL)

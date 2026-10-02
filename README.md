@@ -1,5 +1,14 @@
 # SwarmGuard
 
+![Status: design stage](https://img.shields.io/badge/status-design%20stage-yellow)
+![Python](https://img.shields.io/badge/Python-planned-3776AB?logo=python&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-planned-FF9900)
+![Stripe](https://img.shields.io/badge/Stripe-planned-635BFF?logo=stripe&logoColor=white)
+![JSON Schema](https://img.shields.io/badge/JSON%20Schema-message%20contracts-2B6CB0)
+![NIST SP 800-207](https://img.shields.io/badge/NIST-SP%20800--207-005EA2)
+![Diagrams: Mermaid](https://img.shields.io/badge/diagrams-Mermaid-FF3670?logo=mermaid&logoColor=white)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 **Multi-agent incident response for cloud workloads: log anomaly detection, payment-event correlation and Zero-Trust containment, with a built-in evaluation harness.**
 
 > **Status: early design stage.** The repo skeleton and the first message contract exist. There is no agent code yet. This README is updated in every pull request that changes the design.
@@ -20,18 +29,9 @@ SwarmGuard is a small team of specialized agents that share structured messages 
 
 Containment actions are proposals by default and require human approval. Nothing is executed automatically in the early phases.
 
-```mermaid
-flowchart TD
-    A[Logs and payment events] --> B[Scout]
-    B -->|SuspicionSignal| C[Coordinator]
-    C -->|investigate| D[Investigator]
-    D -->|hypotheses| C
-    C --> E{Decision}
-    E -->|noise| F[Discard]
-    E -->|worth noting| G[Report]
-    E -->|needs action| H[Propose containment]
-    H --> I[Human approval]
-```
+<p align="center">
+  <img src="docs/img/swarmguard-flow.svg" alt="Animated flow: logs and payment events go to Scout, then Coordinator and Investigator, then a decision to discard, report or propose containment" width="900" />
+</p>
 
 ## What will make it different: evaluation
 
@@ -77,7 +77,10 @@ Documentation behind the technologies this project relies on:
 - **Zero Trust:** [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
 - **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
 - **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
-- **Diagrams:** [Mermaid](https://mermaid.js.org)
+- **Diagrams:** [Mermaid](https://mermaid.js.org) and an animated SVG (SMIL)
+- **Badges and icons:** [Shields.io](https://shields.io), [Simple Icons](https://simpleicons.org)
+
+All product names, logos and brands are the property of their respective owners. They are used here only to identify the technologies involved. This project is not affiliated with or endorsed by them.
 
 Agent frameworks and LLM providers will be listed here once they are chosen.
 

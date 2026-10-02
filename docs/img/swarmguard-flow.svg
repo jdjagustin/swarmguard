@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" width="980" height="420" role="img" aria-labelledby="t d">
+<title id="t">SwarmGuard message flow</title>
+<desc id="d">Logs and payment events go to Scout, which sends a SuspicionSignal to the Coordinator. The Coordinator asks the Investigator for hypotheses, then decides: discard, report, or propose containment that waits for human approval. Design stage: nothing here is implemented yet.</desc>
+<defs>
+<marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3fb950"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d29922"/></marker>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/></marker>
+<filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<rect x="1" y="1" width="978" height="418" rx="14" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+<text x="30" y="40" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="700">SwarmGuard</text>
+<text x="30" y="62" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">How a suspicious event travels through the agents</text>
+<path d="M170,203 L213,203" fill="none" stroke="#58a6ff" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ab)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<path d="M365,203 L488,203" fill="none" stroke="#58a6ff" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ab)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="426" y="192" fill="#58a6ff" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">SuspicionSignal</text>
+<path d="M525,175 L525,148" fill="none" stroke="#58a6ff" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ab)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="478" y="166" fill="#58a6ff" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">investigate</text>
+<path d="M595,148 L595,173" fill="none" stroke="#3fb950" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ag)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="652" y="166" fill="#3fb950" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">hypotheses</text>
+<path d="M630,203 L661,203" fill="none" stroke="#bc8cff" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ab)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<path d="M725,183 Q775,125 803,125" fill="none" stroke="#8b949e" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="770" y="132" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">noise</text>
+<path d="M747,203 L803,203" fill="none" stroke="#3fb950" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ag)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="775" y="195" fill="#3fb950" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">notable</text>
+<path d="M725,223 Q775,293 803,293" fill="none" stroke="#d29922" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#aa)"><animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></path>
+<text x="760" y="268" fill="#d29922" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">needs action</text>
+<rect x="30" y="175" width="140" height="56" rx="9" fill="#161b22" stroke="#8b949e" stroke-width="2"/>
+<text x="100.0" y="200.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Logs and</text>
+<text x="100.0" y="218.0" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">payment events</text>
+<rect x="215" y="175" width="150" height="56" rx="9" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+<text x="290.0" y="200.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Scout</text>
+<text x="290.0" y="218.0" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">rules first, LLM second</text>
+<rect x="490" y="175" width="140" height="56" rx="9" fill="#161b22" stroke="#bc8cff" stroke-width="2"/>
+<text x="560.0" y="200.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Coordinator</text>
+<text x="560.0" y="218.0" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">triage and decide</text>
+<rect x="490" y="90" width="140" height="56" rx="9" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+<text x="560.0" y="115.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Investigator</text>
+<text x="560.0" y="133.0" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">correlate, hypothesize</text>
+<polygon points="705,161 747,203 705,245 663,203" fill="#161b22" stroke="#bc8cff" stroke-width="2"/>
+<text x="705" y="208" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Decision</text>
+<rect x="805" y="100" width="160" height="50" rx="9" fill="#161b22" stroke="#8b949e" stroke-width="2"/>
+<text x="885.0" y="130.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Discard</text>
+<rect x="805" y="178" width="160" height="50" rx="9" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+<text x="885.0" y="208.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Report</text>
+<rect x="805" y="262" width="160" height="62" rx="9" fill="#161b22" stroke="#d29922" stroke-width="2"/>
+<text x="885.0" y="290.0" fill="#e6edf3" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Propose containment</text>
+<text x="885.0" y="308.0" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle">waits for human approval</text>
+<g opacity="0"><circle r="9" fill="#58a6ff" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#58a6ff"/><animateMotion path="M170,203 L213,203" dur="8.0s" begin="0.0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="0.0s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#58a6ff" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#58a6ff"/><animateMotion path="M365,203 L488,203" dur="8.0s" begin="0.9s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="0.9s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#58a6ff" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#58a6ff"/><animateMotion path="M525,175 L525,148" dur="8.0s" begin="1.8s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="1.8s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#3fb950" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#3fb950"/><animateMotion path="M595,148 L595,173" dur="8.0s" begin="2.7s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="2.7s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#bc8cff" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#bc8cff"/><animateMotion path="M630,203 L661,203" dur="8.0s" begin="3.6s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="3.6s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#8b949e" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#8b949e"/><animateMotion path="M725,183 Q775,125 803,125" dur="8.0s" begin="4.5s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="4.5s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#3fb950" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#3fb950"/><animateMotion path="M747,203 L803,203" dur="8.0s" begin="5.4s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="5.4s" repeatCount="indefinite"/></g>
+<g opacity="0"><circle r="9" fill="#d29922" opacity="0.45" filter="url(#glow)"/><circle r="5" fill="#d29922"/><animateMotion path="M725,223 Q775,293 803,293" dur="8.0s" begin="6.3s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.0900;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.005;0.0800;0.0900;1" dur="8.0s" begin="6.3s" repeatCount="indefinite"/></g>
+<line x1="30" y1="352" x2="950" y2="352" stroke="#30363d"/>
+<text x="30" y="378" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Illustrative flow: the three outcomes alternate in the animation, they do not all happen at once.</text>
+<text x="30" y="397" fill="#d29922" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="600">Design stage: nothing here is implemented yet. Containment is only ever a proposal until a human approves it.</text>
+</svg>

@@ -1,0 +1,11 @@
+{
+  "decision_id": "dec-7c2e41",
+  "created_at": "2026-10-02T14:32:10Z",
+  "source_agent": "coordinator",
+  "signal_id": "sig-8f3a2c",
+  "report_id": "rep-4b1d9e",
+  "decision": "propose_action",
+  "rationale": "Card testing is the leading hypothesis and two independent sources agree: declined charges in Stripe and a request spike from one range in the flow logs.",
+  "confidence": 0.8,
+  "corroborating_sources": ["stripe_event", "vpc_flow_logs"]
+}

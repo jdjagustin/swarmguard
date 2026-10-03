@@ -11,7 +11,7 @@
 
 **Multi-agent incident response for cloud workloads: log anomaly detection, payment-event correlation and Zero-Trust containment, with a built-in evaluation harness.**
 
-> **Status: early design stage.** The repo skeleton and the first message contract exist. There is no agent code yet. This README is updated in every pull request that changes the design.
+> **Status: early design stage.** The repo skeleton and the message contracts exist. There is no agent code yet. This README is updated in every pull request that changes the design.
 
 ## The problem
 
@@ -47,6 +47,8 @@ Agents communicate through JSON messages validated against schemas in [`schemas/
 
 - [`SuspicionSignal`](schemas/suspicion_signal.schema.json): emitted by Scout when it detects something suspicious. Required fields: id, timestamp, source agent, severity, summary and at least one piece of evidence that points to the original record.
 - [`HypothesisReport`](schemas/hypothesis_report.schema.json): emitted by the Investigator after analyzing a signal. Required fields: id, timestamp, source agent, the `signal_id` it analyzed and at least one hypothesis. Each hypothesis has a title, an explanation, a confidence between 0 and 1, a category (including `benign` and `unknown`) and its own evidence.
+- [`CoordinatorDecision`](schemas/coordinator_decision.schema.json): emitted by the Coordinator. It discards the signal, reports it or proposes an action, and points back to the signal and report it used. A proposal must be corroborated by at least two different evidence sources.
+- [`GuardianAction`](schemas/guardian_action.schema.json): the Guardian's proposed containment action (Phase 4). Always a dry run that needs human approval, limited to a closed list of reversible action types, and it expires after at most one day.
 
 ## Security
 
@@ -54,7 +56,7 @@ SwarmGuard reads untrusted text and can propose infrastructure changes, so the s
 
 ## Roadmap
 
-- [x] **Phase 0 - Foundations:** repo skeleton, `SuspicionSignal` and `HypothesisReport` schemas
+- [x] **Phase 0 - Foundations:** repo skeleton and the four message schemas (`SuspicionSignal`, `HypothesisReport`, `CoordinatorDecision`, `GuardianAction`)
 - [ ] **Phase 1 - MVP:** Scout, Investigator and Coordinator running locally on synthetic logs and Stripe test-mode events
 - [ ] **Phase 2 - Evaluation harness:** synthetic scenarios, metrics, single-agent baseline
 - [ ] **Phase 3 - Collaboration:** structured message passing and consensus between agents
@@ -70,7 +72,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-The tests check the message schemas: that they are valid, that the evidence shape matches in both, and that example and broken messages behave as expected.
+The tests check the four message schemas: that they are valid, that the evidence shape matches in the messages that carry it, and that example and broken messages behave as expected.
 
 ## Repository layout
 

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GuardianAction",
+  "description": "Structured message emitted by the Guardian agent: a proposed containment action. It is always a dry run that needs human approval, uses a closed list of reversible action types and expires after a bounded time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action_id", "created_at", "source_agent", "decision_id", "mode", "action_type", "target", "ttl_minutes", "summary", "requires_human_approval"],
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "pattern": "^act-[0-9a-f]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_agent": {
+      "type": "string",
+      "enum": ["guardian"]
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^dec-[0-9a-f]{6,}$"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["dry_run"]
+    },
+    "action_type": {
+      "type": "string",
+      "enum": ["block_ip_temporary", "rate_limit_temporary", "restrict_security_group_temporary"]
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "ttl_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1440
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "requires_human_approval": {
+      "type": "boolean",
+      "const": true
+    }
+  }
+}

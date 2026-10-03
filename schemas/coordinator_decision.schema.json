@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoordinatorDecision",
+  "description": "Structured message emitted by the Coordinator agent after weighing a HypothesisReport: discard the signal, report it to a human, or propose a containment action. A proposal needs corroboration from at least two independent evidence sources.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision_id", "created_at", "source_agent", "signal_id", "report_id", "decision", "rationale", "confidence"],
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "pattern": "^dec-[0-9a-f]{6,}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_agent": {
+      "type": "string",
+      "enum": ["coordinator"]
+    },
+    "signal_id": {
+      "type": "string",
+      "pattern": "^sig-[0-9a-f]{6,}$"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^rep-[0-9a-f]{6,}$"
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["discard", "report", "propose_action"]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "corroborating_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["cloudwatch_logs", "vpc_flow_logs", "application_logs", "stripe_event"]
+      }
+    }
+  },
+  "if": {
+    "properties": { "decision": { "const": "propose_action" } },
+    "required": ["decision"]
+  },
+  "then": {
+    "required": ["corroborating_sources"],
+    "properties": {
+      "corroborating_sources": { "minItems": 2 }
+    }
+  }
+}

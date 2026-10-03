@@ -6,7 +6,7 @@
 ![Stripe](https://img.shields.io/badge/Stripe-planned-635BFF?logo=stripe&logoColor=white)
 ![JSON Schema](https://img.shields.io/badge/JSON%20Schema-message%20contracts-2B6CB0)
 ![NIST SP 800-207](https://img.shields.io/badge/NIST-SP%20800--207-005EA2)
-![Diagrams: Mermaid](https://img.shields.io/badge/diagrams-Mermaid-FF3670?logo=mermaid&logoColor=white)
+![Diagrams: Mermaid and SVG](https://img.shields.io/badge/diagrams-Mermaid%20%2B%20SVG-FF3670?logo=mermaid&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 **Multi-agent incident response for cloud workloads: log anomaly detection, payment-event correlation and Zero-Trust containment, with a built-in evaluation harness.**
@@ -27,7 +27,7 @@ SwarmGuard is a small team of specialized agents that share structured messages 
 | **Investigator** | Takes a signal, pulls more context, correlates sources and produces hypotheses with a confidence level. |
 | **Coordinator** | Decides what to do with a signal: discard, report, or propose a containment action. |
 
-Containment actions are proposals by default and require human approval. Nothing is executed automatically in the early phases.
+Containment actions are proposals by default and require human approval. Nothing is executed automatically in the early phases. See [`docs/architecture.md`](docs/architecture.md) for the message flow and the design decisions.
 
 <p align="center">
   <img src="docs/img/swarmguard-flow.svg" alt="Animated flow: logs and payment events go to Scout, then Coordinator and Investigator, then a decision to discard, report or propose containment" width="900" />
@@ -82,7 +82,8 @@ schemas/                 JSON schemas for inter-agent messages
 evals/scenarios/         synthetic incident scenarios
 tests/                   contract tests and example messages
 requirements-dev.txt     development dependencies (pytest, jsonschema)
-docs/                    architecture and design documentation
+.github/                 pull request template
+docs/                    architecture, contracts and security documentation (diagrams in docs/img/)
 ```
 
 ## References

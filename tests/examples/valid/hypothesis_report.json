@@ -1,0 +1,37 @@
+{
+  "report_id": "rep-4b1d9e",
+  "created_at": "2026-10-02T14:31:30Z",
+  "source_agent": "investigator",
+  "signal_id": "sig-8f3a2c",
+  "hypotheses": [
+    {
+      "title": "Card testing from a single IP range",
+      "explanation": "42 declined charges in 5 minutes, all from addresses in one range, match a card testing pattern.",
+      "confidence": 0.82,
+      "category": "card_testing",
+      "evidence": [
+        {
+          "source": "stripe_event",
+          "reference": "evt_test_123",
+          "excerpt": "charge failed: card_declined (42 in 5 minutes)"
+        },
+        {
+          "source": "vpc_flow_logs",
+          "reference": "flow-log-stream/2026-10-02T14"
+        }
+      ]
+    },
+    {
+      "title": "Legitimate traffic spike from a campaign",
+      "explanation": "A marketing campaign could explain the request spike, but not the declined cards.",
+      "confidence": 0.1,
+      "category": "benign",
+      "evidence": [
+        {
+          "source": "application_logs",
+          "reference": "app-log-stream/2026-10-02T14"
+        }
+      ]
+    }
+  ]
+}

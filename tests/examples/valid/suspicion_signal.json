@@ -1,0 +1,19 @@
+{
+  "signal_id": "sig-8f3a2c",
+  "created_at": "2026-10-02T14:30:00Z",
+  "source_agent": "scout",
+  "severity": "HIGH",
+  "summary": "Burst of failed card payments plus a request spike from one IP range",
+  "affected_resources": ["api-gateway/payments"],
+  "evidence": [
+    {
+      "source": "stripe_event",
+      "reference": "evt_test_123",
+      "excerpt": "charge failed: card_declined (42 in 5 minutes)"
+    },
+    {
+      "source": "vpc_flow_logs",
+      "reference": "flow-log-stream/2026-10-02T14"
+    }
+  ]
+}

@@ -11,10 +11,10 @@ SwarmGuard is a small team of specialized agents that exchange structured, schem
 | Agent | Input | Output | Notes |
 |-------|-------|--------|-------|
 | **Scout** | Logs and payment events | `SuspicionSignal` | Deterministic rules run first. An LLM is called only when a rule fires, to summarize and structure the signal. |
-| **Coordinator** | Signals and hypotheses | Decision: discard, report or propose action | Triage and orchestration. Avoids contradictory actions. |
-| **Investigator** | A signal plus extra context | Hypotheses with a confidence level | Correlates sources such as payment events and network logs. |
+| **Investigator** | A `SuspicionSignal` plus extra context | `HypothesisReport` | Correlates sources such as payment events and network logs. |
+| **Coordinator** | Signals and hypothesis reports | `CoordinatorDecision`: discard, report or propose action | Triage and orchestration. Avoids contradictory actions. |
 
-A fourth agent, **Guardian**, is planned for a later phase. It turns an approved decision into a concrete containment action, in dry-run mode first.
+A fourth agent, **Guardian**, is planned for Phase 4. When the Coordinator decides `propose_action`, the Guardian turns that decision into a concrete `GuardianAction`, always a dry run, which a human approves or rejects. Until then there is no Guardian: a proposal from the Coordinator is shown to a human as a report and nothing is executed.
 
 ## Message flow
 
@@ -25,25 +25,34 @@ sequenceDiagram
     participant S as Scout
     participant C as Coordinator
     participant I as Investigator
+    participant G as Guardian (Phase 4)
     participant H as Human
 
     S->>C: SuspicionSignal
     C->>C: Triage the signal
-    C->>I: Investigate
+    C->>I: SuspicionSignal (forwarded)
     I->>I: Correlate sources
-    I-->>C: Hypotheses with confidence
-    C->>C: Decide
+    I-->>C: HypothesisReport
+    C->>C: Decide (CoordinatorDecision)
     alt Noise
         C->>C: Discard
     else Worth noting
         C->>C: Write report
     else Needs action
-        C->>H: Proposed containment action
-        H-->>C: Approve or reject
+        C->>G: Decision: propose_action
+        G->>H: GuardianAction (dry run)
+        H-->>G: Approve or reject
     end
 ```
 
 Four contracts exist today: `SuspicionSignal` (Scout to Coordinator), `HypothesisReport` (Investigator to Coordinator), `CoordinatorDecision` (the Coordinator's outcome) and `GuardianAction` (the Guardian's dry-run proposal, Phase 4). They link to each other by identifier, so an incident can be followed from signal to action. All four are defined before any agent code depends on them.
+
+The Coordinator forwards the `SuspicionSignal` itself to the Investigator, so there is no separate "investigate" request message and no free text between agents.
+
+Two messages do not have a contract yet and will get one before code depends on them:
+
+- **Audit log record:** what each agent saw, proposed and decided. The monitor, the reviewer and the evaluation harness all read it, so it is the next contract to define (Phase 1 or 2).
+- **Human approval record:** the approve or reject answer to a `GuardianAction` (Phase 4).
 
 ## Design decisions
 

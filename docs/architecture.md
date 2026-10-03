@@ -43,7 +43,7 @@ sequenceDiagram
     end
 ```
 
-Two contracts exist today: `SuspicionSignal` (Scout to Coordinator) and `HypothesisReport` (Investigator to Coordinator). The decision and action messages will get their own schemas in later pull requests, before any agent code depends on them.
+Four contracts exist today: `SuspicionSignal` (Scout to Coordinator), `HypothesisReport` (Investigator to Coordinator), `CoordinatorDecision` (the Coordinator's outcome) and `GuardianAction` (the Guardian's dry-run proposal, Phase 4). They link to each other by identifier, so an incident can be followed from signal to action. All four are defined before any agent code depends on them.
 
 ## Design decisions
 

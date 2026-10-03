@@ -53,10 +53,19 @@ The values are made up, for illustration only.
 
 - **A valid shape is not a true statement.** A message can match its schema perfectly and still contain false claims, whether from a confused model or from an attacker who shaped the input.
 - **Free-text fields can still carry instructions.** A schema limits length and allowed fields, but it cannot tell whether a string such as `summary` contains an instruction. Code that reads those fields must treat them as data, never as commands.
-- **Validation is not automated yet.** Today the schemas are checked by hand. Automated tests that validate example messages against the schemas are planned.
+- **Passing the tests means the shape is right, nothing more.** The tests below check shape and limits. They cannot tell whether a message is true or safe.
+
+## Testing the contracts
+
+Automated tests in [`tests/test_schemas.py`](../tests/test_schemas.py) run with pytest (see the README for how to run them). They check that:
+
+- both schemas are valid JSON Schema documents;
+- the evidence shape is identical in both schemas, so the decision to copy it stays safe;
+- the example messages in `tests/examples/valid/` pass, and so does the example in this document;
+- broken messages are rejected: missing or empty evidence, malformed identifiers, the wrong source agent, unknown values, confidence out of range, text that is too long, malformed timestamps and extra fields.
 
 ## Changing a contract
 
-- A contract changes through a pull request that updates the schema, the examples in this document and the README or architecture docs in the same PR.
+- A contract changes through a pull request that updates the schema, the examples in this document, the test examples under `tests/examples/` and the README or architecture docs in the same PR.
 - Adding an optional field is usually safe. Removing or renaming a field, or making an optional field required, can break agents that depend on it, so the PR description must say so.
-- The evidence shape is copied in both schemas, so a change to it must be made in both. See the decision in [`architecture.md`](architecture.md#evidence-shape-is-copied-not-shared).
+- The evidence shape is copied in both schemas, so a change to it must be made in both. See the decision in [`architecture.md`](architecture.md#evidence-shape-is-copied-not-shared). A test fails if the two copies differ.

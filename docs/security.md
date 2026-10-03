@@ -69,7 +69,7 @@ The central rule: **agents propose, deterministic code decides.** An LLM never h
 | Untrusted-text handling in prompts | Labels external text as data, keeps it out of instruction position | 1 |
 | Per-signal budgets (tokens, time, calls) | Caps the cost of any single event | 1 |
 | Append-only audit log | Records inputs, hypotheses, decisions and approvals | 1 |
-| Deterministic monitor | Reads the audit log and raises alerts on abnormal agent behavior | 3 |
+| Deterministic monitor | Reads the audit log, raises alerts on abnormal agent behavior and sends a heartbeat so a silent monitor is noticed | 3 |
 | Honeypot strings | Planted fake secrets that should never appear in outputs; if one does, an agent was manipulated | 2 |
 | Adversarial evaluation scenarios | Prompt injection and poisoning cases run as part of the [evaluation harness](../README.md#what-will-make-it-different-evaluation) | 2 |
 | Policy layer between agents and tools | Allow lists, rate limits and dry-run mode for every action | 4 |
@@ -110,13 +110,16 @@ Decision point: before Phase 4, when agents first call tools that change anythin
 
 **Approval channel.** How a human approves or rejects a proposal (chat, ticket, or a small web page) is open until Phase 4.
 
-**Monitor design.** The monitor stays deterministic and does not use an LLM. This one is decided: a watcher that can be talked into things is not a watcher.
+**Monitor design.** The monitor stays deterministic and does not use an LLM. This one is decided: a watcher that can be talked into things is not a watcher. It is small, read-only on the audit log and has its own credentials. It also sends a periodic heartbeat (Phase 3, together with the monitor): if the heartbeat stops, a human is alerted, so a silent or disabled monitor does not go unnoticed. Its rules are tested against the adversarial scenarios below.
+
+**Reviewer agent.** An LLM reviewer could check things a rule cannot, for example whether the Coordinator's rationale matches the evidence. It is not part of the MVP and is considered for Phase 3. If added, it would be advisory only: it reads the audit log, emits a structured message and can only raise an alert for a human. It could never block, execute or switch anything off, so a manipulated reviewer can cause at most a false or missed alert, and the deterministic monitor stays the hard line of defense. The same idea could serve as an offline judge in the evaluation harness (Phase 2).
 
 ## 9. Known limitations
 
 - Prompt injection cannot be fully prevented. The design bounds the damage instead of promising immunity.
 - Detection heuristics have false negatives and false positives.
 - Rules-first detection can be studied and evaded by an attacker who learns the rules.
+- The deterministic monitor only detects what its rules anticipate, and it trusts that the audit log reached it intact. A new kind of attack that matches no rule passes, which is why the log is append-only and out of the agents' reach.
 - Human approval can turn into rubber-stamping if there are too many proposals. The evaluation harness should track how many proposals are produced per incident.
 - Local emulation of cloud services does not reproduce every behavior of real AWS, especially IAM.
 - Dependencies, build pipeline and developer machines are out of scope (see section 1).

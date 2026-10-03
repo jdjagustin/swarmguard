@@ -61,13 +61,25 @@ SwarmGuard reads untrusted text and can propose infrastructure changes, so the s
 - [ ] **Phase 4 - Actions:** Guardian agent in dry-run mode, human approval flow
 - [ ] **Phase 5 - AWS:** real CloudWatch and WAF integrations, infrastructure as code
 
+## Running the tests
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest
+```
+
+The tests check the message schemas: that they are valid, that the evidence shape matches in both, and that example and broken messages behave as expected.
+
 ## Repository layout
 
 ```
 src/swarmguard/agents/   agent implementations
 schemas/                 JSON schemas for inter-agent messages
 evals/scenarios/         synthetic incident scenarios
-tests/                   automated tests
+tests/                   contract tests and example messages
+requirements-dev.txt     development dependencies (pytest, jsonschema)
 docs/                    architecture and design documentation
 ```
 
@@ -83,6 +95,7 @@ Documentation behind the technologies this project relies on:
 - **Agent tool security (open decision):** [Model Context Protocol specification](https://modelcontextprotocol.io/specification/latest), [MCP Security Best Practices](https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices)
 - **Adversary tactics against ML systems:** [MITRE ATLAS](https://atlas.mitre.org/)
 - **Message contracts:** [JSON Schema specification](https://json-schema.org/specification)
+- **Testing:** [pytest](https://docs.pytest.org/en/stable/), [jsonschema for Python](https://python-jsonschema.readthedocs.io/en/stable/)
 - **Streaming (considered, not used yet):** [Apache Kafka documentation](https://kafka.apache.org/documentation/)
 - **Diagrams:** [Mermaid](https://mermaid.js.org) and an animated SVG (SMIL)
 - **Badges and icons:** [Shields.io](https://shields.io), [Simple Icons](https://simpleicons.org)
